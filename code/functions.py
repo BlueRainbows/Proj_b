@@ -24,7 +24,6 @@ def get_successful_op(remittance):
     return list_values
 
 
-# print(get_successful_op(remittance))
 list_val = get_successful_op(remittance)
 
 
@@ -45,4 +44,17 @@ def sorted_data(list_val):
     return list_month
 
 
-print(sorted_data(list_val))
+list_sorted = sorted_data(list_val)
+
+
+def getting_index(list_val, list_sorted):
+    """Функция находит индексы последних 5ти операций"""
+    list_index = []
+    del list_sorted[5:]
+    for val in list_sorted:
+        ind = list_val.index(val)
+        list_index.append(ind)
+    return list_index
+
+
+print(getting_index(list_val, list_sorted))
