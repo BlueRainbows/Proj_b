@@ -93,7 +93,6 @@ def get_op_output(list_val, list_index):
         raw_to = ' '.join(raw_to)
         slices = raw_to + ' ' + slices
         list_data.append(slices)
-        list_data.append('->')
         string_from = list_values[-1]
         if string_from != '-':
             raw_from = string_from.split(' ')
@@ -112,5 +111,19 @@ def get_op_output(list_val, list_index):
     return list_data
 
 
-print(get_op_output(list_val, list_index))
 text_data = get_op_output(list_val, list_index)
+
+
+def getting_str(text_data,data_output):
+    operation = text_data[0::4]
+    account_to = text_data[1::4]
+    account_from = text_data[2::4]
+    summ = text_data[3::4]
+    list_of_str = []
+    clear_str = ''
+    for d in range(len(data_output)):
+        string_1 = data_output[d] + ' ' + operation[d] + '\n' + account_to[d] + ' -> ' + account_from[d] + '\n' + summ[d] + '\n'
+        list_of_str.append(string_1)
+    for st in list_of_str:
+        clear_str += st + '\n'
+    return clear_str
