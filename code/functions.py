@@ -1,8 +1,3 @@
-from utils import open_json_file
-
-remittance = open_json_file()
-
-
 def get_successful_op(remittance):
     """Функция обрабатывает документ, выводя список значений операций,
     если ключ 'from' отсутствует в словаре, то он заменяется на значение '-'.
@@ -24,9 +19,6 @@ def get_successful_op(remittance):
     return list_values
 
 
-list_val = get_successful_op(remittance)
-
-
 def sorted_data(list_val):
     """Функция вытаскивает из списка дату операции,
     определяет последний год совершенной операции и сортирует от самой последней в данном году,
@@ -44,9 +36,6 @@ def sorted_data(list_val):
     return list_month
 
 
-list_sorted = sorted_data(list_val)
-
-
 def getting_date_output(list_sorted):
     """Функция возвращает список последних 5ти дат операций"""
     list_of_op = []
@@ -61,9 +50,6 @@ def getting_date_output(list_sorted):
     return list_of_op
 
 
-data_output = getting_date_output(list_sorted)
-
-
 def getting_index(list_val, list_sorted):
     """Функция находит индексы последних 5ти операций"""
     list_index = []
@@ -72,9 +58,6 @@ def getting_index(list_val, list_sorted):
         ind = list_val.index(val)
         list_index.append(ind)
     return list_index
-
-
-list_index = getting_index(list_val, list_sorted)
 
 
 def get_op_output(list_val, list_index):
@@ -111,10 +94,7 @@ def get_op_output(list_val, list_index):
     return list_data
 
 
-text_data = get_op_output(list_val, list_index)
-
-
-def getting_str(text_data,data_output):
+def getting_str(text_data, data_output):
     operation = text_data[0::4]
     account_to = text_data[1::4]
     account_from = text_data[2::4]
