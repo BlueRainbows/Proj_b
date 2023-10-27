@@ -57,4 +57,33 @@ def getting_index(list_val, list_sorted):
     return list_index
 
 
-print(getting_index(list_val, list_sorted))
+list_index = getting_index(list_val, list_sorted)
+
+
+def getting_date_output(list_val, list_sorted, list_index):
+    """Функция возвращает список значений 5ти совершенных операций:
+    дата-операция-откуда-куда-сумма"""
+    list_data = []
+    del list_sorted[5:]
+    for st in list_sorted:
+        raw_string = st
+        string = raw_string.replace('-', 'T')
+        string = string.split('T')
+        del string[-1]
+        data_string = string[2] + '.' + string[1] + '.' + string[0]
+        list_data.append(data_string)
+        for ind in list_index:
+            list_values = list_val[ind+1:ind+5]
+            string_description = list_values[1]
+            list_data.append(string_description)
+            string_to = list_values[-2]
+            list_data.append(string_to)
+            list_data.append('->')
+            string_from = list_values[-1]
+            list_data.append(string_from)
+            string_summ = list_values[0]['amount'] + ' ' + list_values[0]['currency']['name']
+            list_data.append(string_summ)
+    return list_data
+
+
+print(getting_date_output(list_val, list_sorted, list_index))
