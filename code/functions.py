@@ -47,6 +47,23 @@ def sorted_data(list_val):
 list_sorted = sorted_data(list_val)
 
 
+def getting_date_output(list_sorted):
+    """Функция возвращает список последних 5ти дат операций"""
+    list_of_op = []
+    del list_sorted[5:]
+    for st in list_sorted:
+        raw_string = st
+        string = raw_string.replace('-', 'T')
+        string = string.split('T')
+        del string[-1]
+        data_string = string[2] + '.' + string[1] + '.' + string[0]
+        list_of_op.append(data_string)
+    return list_of_op
+
+
+data_output = getting_date_output(list_sorted)
+
+
 def getting_index(list_val, list_sorted):
     """Функция находит индексы последних 5ти операций"""
     list_index = []
@@ -60,30 +77,40 @@ def getting_index(list_val, list_sorted):
 list_index = getting_index(list_val, list_sorted)
 
 
-def getting_date_output(list_val, list_sorted, list_index):
-    """Функция возвращает список значений 5ти совершенных операций:
-    дата-операция-откуда-куда-сумма"""
+def get_op_output(list_val, list_index):
     list_data = []
-    del list_sorted[5:]
-    for st in list_sorted:
-        raw_string = st
-        string = raw_string.replace('-', 'T')
-        string = string.split('T')
-        del string[-1]
-        data_string = string[2] + '.' + string[1] + '.' + string[0]
-        list_data.append(data_string)
-        for ind in list_index:
-            list_values = list_val[ind+1:ind+5]
-            string_description = list_values[1]
-            list_data.append(string_description)
-            string_to = list_values[-2]
-            list_data.append(string_to)
-            list_data.append('->')
-            string_from = list_values[-1]
+    for ind in list_index:
+        list_values = list_val[ind+1:ind+5]
+        string_description = list_values[1]
+        list_data.append(string_description)
+        string_to = list_values[-2]
+        raw_to = string_to.split(' ')
+        creating_to = raw_to[-1]
+        slices = creating_to.replace(creating_to[6:-4], '** **** ')
+        srt_dig_to = creating_to[:4] + ' '
+        slices = slices.replace(creating_to[:4], srt_dig_to)
+        del raw_to[-1]
+        raw_to = ' '.join(raw_to)
+        slices = raw_to + ' ' + slices
+        list_data.append(slices)
+        list_data.append('->')
+        string_from = list_values[-1]
+        if string_from != '-':
+            raw_from = string_from.split(' ')
+            creating_from = raw_from[-1]
+            slices_from = creating_from.replace(creating_from[6:-4], '** **** ')
+            srt_dig_from = creating_from[:4] + ' '
+            slices_from = slices.replace(creating_from[:4], srt_dig_from)
+            del raw_from[-1]
+            raw_from = ' '.join(raw_from)
+            slices_from = raw_from + ' ' + slices_from
+            list_data.append(slices_from)
+        else:
             list_data.append(string_from)
-            string_summ = list_values[0]['amount'] + ' ' + list_values[0]['currency']['name']
-            list_data.append(string_summ)
+        string_summ = list_values[0]['amount'] + ' ' + list_values[0]['currency']['name']
+        list_data.append(string_summ)
     return list_data
 
 
-print(getting_date_output(list_val, list_sorted, list_index))
+print(get_op_output(list_val, list_index))
+text_data = get_op_output(list_val, list_index)
