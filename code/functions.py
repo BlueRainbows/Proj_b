@@ -80,9 +80,7 @@ def get_op_output(list_val, list_index):
         if string_from != '-':
             raw_from = string_from.split(' ')
             creating_from = raw_from[-1]
-            slices_from = creating_from.replace(creating_from[6:-4], '** **** ')
-            srt_dig_from = creating_from[:4] + ' '
-            slices_from = slices.replace(creating_from[:4], srt_dig_from)
+            slices_from = creating_from.replace(creating_from[:-4], '**')
             del raw_from[-1]
             raw_from = ' '.join(raw_from)
             slices_from = raw_from + ' ' + slices_from
@@ -102,7 +100,8 @@ def getting_str(text_data, data_output):
     list_of_str = []
     clear_str = ''
     for d in range(len(data_output)):
-        string_1 = data_output[d] + ' ' + operation[d] + '\n' + account_to[d] + ' -> ' + account_from[d] + '\n' + summ[d] + '\n'
+        string_1 = (data_output[d] + ' ' + operation[d] + '\n' + account_to[d] + ' -> ' +
+                    account_from[d] + '\n' + summ[d] + '\n')
         list_of_str.append(string_1)
     for st in list_of_str:
         clear_str += st + '\n'
