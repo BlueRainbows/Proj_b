@@ -1,7 +1,7 @@
 def get_successful_op(remittance):
-    """Функция обрабатывает документ, выводя список значений операций,
+    """ Функция обрабатывает документ, выводя список значений операций,
     если ключ 'from' отсутствует в словаре, то он заменяется на значение '-'.
-    Затем из общего списка операций убирает не удачные, возвращает успешные"""
+    Затем из общего списка операций убирает не удачные, возвращает успешные """
     index_list = []
     list_values = []
     for i in range(len(remittance)):
@@ -20,9 +20,9 @@ def get_successful_op(remittance):
 
 
 def sorted_data(list_val):
-    """Функция вытаскивает из списка дату операции,
+    """ Функция вытаскивает из списка дату операции,
     определяет последний год совершенной операции и сортирует от самой последней в данном году,
-    до самой первой"""
+    до самой первой """
     list_age = []
     list_month = []
     list_of_data = list_val[2::7]
@@ -37,7 +37,7 @@ def sorted_data(list_val):
 
 
 def getting_date_output(list_sorted):
-    """Функция возвращает список последних 5ти дат операций"""
+    """ Функция возвращает список последних 5ти дат операций """
     list_of_op = []
     del list_sorted[5:]
     for st in list_sorted:
@@ -51,7 +51,7 @@ def getting_date_output(list_sorted):
 
 
 def getting_index(list_val, list_sorted):
-    """Функция находит индексы последних 5ти операций"""
+    """ Функция находит индексы последних 5ти операций """
     list_index = []
     del list_sorted[5:]
     for val in list_sorted:
@@ -61,6 +61,9 @@ def getting_index(list_val, list_sorted):
 
 
 def get_op_output(list_val, list_index):
+    """ Функция принимает список значений и индексов, ищет нужные параметры по индексам,
+    затем добавляет их в список.
+    Если значение параметра тебует изменения, то меняет его под нужный формат """
     list_data = []
     for ind in list_index:
         list_values = list_val[ind+1:ind+5]
@@ -93,6 +96,8 @@ def get_op_output(list_val, list_index):
 
 
 def getting_str(text_data, data_output):
+    """ Функция берет из списка значения, склеивает их в строку, разделяет одну операцию по блоку,
+    выводит 5 блоков """
     operation = text_data[0::4]
     account_to = text_data[1::4]
     account_from = text_data[2::4]
