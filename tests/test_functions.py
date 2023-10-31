@@ -1,8 +1,8 @@
 import pytest
 
-from code.functions import get_successful_op, sorted_data, getting_date_output, getting_index, get_op_output, \
+from functions import get_successful_op, sorted_data, getting_date_output, getting_index, get_op_output, \
     getting_str
-from code.utils import open_json_file
+from utils import open_json_file
 
 
 @pytest.fixture
